@@ -5,6 +5,13 @@ import lombok.ToString;
 
 import java.util.Date;
 
+import lombok.Data;
+
+import lombok.AllArgsConstructor;
+
+@Data
+
+@AllArgsConstructor
 @ToString
 @Entity
 public class Cours {
@@ -26,6 +33,8 @@ public class Cours {
         this.prixCours = prixCours;
         this.dateCreation = dateCreation;
     }
+    @ManyToOne
+    private Section section;
 
     public Long getIdCours() {
         return idCours;

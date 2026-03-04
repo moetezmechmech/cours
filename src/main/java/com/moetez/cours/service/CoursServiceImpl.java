@@ -7,6 +7,7 @@ import com.moetez.cours.entities.Cours;
 import com.moetez.cours.repos.CoursRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import com.moetez.cours.entities.Section;
 
 @Service
 public
@@ -48,5 +49,40 @@ class CoursServiceImpl implements CoursService {
     @Override
     public Page<Cours> getAllCoursParPage(int page, int size) {
         return coursRepository.findAll(PageRequest.of(page, size));
+    }
+
+    @Override
+    public List<Cours> findByNomCours(String nom) {
+        return coursRepository.findByNomCours(nom);
+    }
+
+    @Override
+    public List<Cours> findByNomCoursContains(String nom) {
+        return coursRepository.findByNomCoursContains(nom);
+    }
+
+    @Override
+    public List<Cours> findByNomPrix(String nom, Double prix) {
+        return coursRepository.findByNomPrix(nom, prix);
+    }
+
+    @Override
+    public List<Cours> findBySection(Section section) {
+        return coursRepository.findBySection(section);
+    }
+
+    @Override
+    public List<Cours> findBySectionIdSection(Long id) {
+        return coursRepository.findBySectionIdSection(id);
+    }
+
+    @Override
+    public List<Cours> findByOrderByNomCoursAsc() {
+        return coursRepository.findByOrderByNomCoursAsc();
+    }
+
+    @Override
+    public List<Cours> trierCoursNomsPrix() {
+        return coursRepository.trierCoursNomsPrix();
     }
 }

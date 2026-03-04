@@ -23,7 +23,7 @@ public class CoursController {
 
     @RequestMapping("/ListeCours")
     public String listeCours(ModelMap modelMap,
-                             @RequestParam(name="page", defaultValue="0") int page,
+                             @RequestParam(name="page", defaultValue="1") int page,
                              @RequestParam(name="size", defaultValue="2") int size) {
 
         Page<Cours> coursPage = coursService.getAllCoursParPage(page, size);
@@ -36,14 +36,9 @@ public class CoursController {
         return "listeCours";
     }
 
-    // ✅ لازمها باش زر "Ajouter" يخدم
-    @RequestMapping("/showCreate")
-    public String showCreate(ModelMap modelMap) {
-        modelMap.addAttribute("cours", new Cours());
-        return "createCours";
-    }
 
-    // ✅ save
+
+
     @RequestMapping("/saveCours")
     public String saveCours(@ModelAttribute("cours") Cours cours,
                             @RequestParam("date") String date,
@@ -58,7 +53,6 @@ public class CoursController {
         return "redirect:/ListeCours?page=0&size=2";
     }
 
-    // ✅ delete + pagination
     @RequestMapping("/supprimerCours")
     public String supprimerCours(@RequestParam("id") Long id,
                                  ModelMap modelMap,

@@ -22,7 +22,7 @@
                     <th>ID</th><th>Nom Cours</th><th>Prix</th><th>Date</th><th>Actions</th>
                 </tr>
 
-                <!-- ✅ مهم: cours.content (PDF خطوة 8) -->
+
                 <tr th:each="c:${cours.content}">
                     <td th:text="${c.idCours}"></td>
                     <td th:text="${c.nomCours}"></td>
@@ -38,12 +38,12 @@
                 </tr>
             </table>
 
-            <!-- ✅ pagination (PDF خطوة 11) -->
+
             <ul class="nav nav-pills">
                 <li th:each="p,status:${pages}">
                     <a th:class="${status.index==currentPage?'btn btn-primary':'btn'}"
                        th:href="@{ListeCours(page=${status.index}, size=${size})}"
-                       th:text="${status.index}">
+                       th:text="${status.index }">
                     </a>
                 </li>
             </ul>
