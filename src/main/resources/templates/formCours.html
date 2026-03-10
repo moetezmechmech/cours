@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+  <meta charset="utf-8">
+  <title>Formulaire Cours</title>
+</head>
+<body>
+<div th:replace="template"></div>
+
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header" th:if="${mode=='new'}">Ajout des Cours</div>
+    <div class="card-header" th:if="${mode=='edit'}">Modification des Cours</div>
+
+    <div class="card-body">
+      <form th:action="@{saveCours}" method="post">
+
+        <input type="hidden" name="idCours" th:value="${cours.idCours}" />
+        <input type="hidden" name="page" th:value="${page}" />
+        <input type="hidden" name="size" th:value="${size}" />
+
+        <div class="form-group">
+          <label class="control-label">Nom Cours :</label>
+          <input type="text" name="nomCours" class="form-control"
+                 th:value="${cours.nomCours}" />
+          <span th:errors="${cours.nomCours}" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Prix Cours :</label>
+          <input type="text" name="prixCours" class="form-control"
+                 th:value="${cours.prixCours}" />
+          <span th:errors="${cours.prixCours}" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Date création :</label>
+          <input type="date" name="dateCreation" class="form-control"
+                 th:value="${#dates.format(cours.dateCreation,'yyyy-MM-dd')}" />
+          <span th:errors="${cours.dateCreation}" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label">Section :</label>
+
+          <select name="section" class="form-control"
+                  th:value="${cours.section.idSection}"
+                  th:if="${!#strings.isEmpty(cours.section)}">
+            <option th:each="s:${sections}" th:if="${mode=='edit'}"
+                    th:value="${s.idSection}" th:text="${s.nomSection}"
+                    th:selected="${s.idSection==cours.section.idSection}">
+            </option>
+          </select>
+
+          <select name="section" class="form-control"
+                  th:if="${#strings.isEmpty(cours.section)}">
+            <option th:each="s:${sections}" th:value="${s.idSection}"
+                    th:text="${s.nomSection}">
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <button type="submit" class="btn btn-primary">Valider</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

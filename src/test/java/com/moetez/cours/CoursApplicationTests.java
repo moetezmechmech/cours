@@ -23,7 +23,13 @@ class CoursApplicationTests {
     @Test
     public void testCreateCours() {
         Section s = sectionRepository.findById(1L).orElse(null);
-        Cours c = new Cours("Spring Boot", 300.0, new Date());
+        Cours c = new Cours();
+        c.setNomCours("Spring Boot");
+        c.setPrixCours(300.0);
+        c.setDateCreation(new Date());
+        c.setSection(s);
+
+        coursRepository.save(c);
         c.setSection(s);
         coursRepository.save(c);
     }
@@ -87,7 +93,7 @@ class CoursApplicationTests {
 
     @Test
     void testFindBySectionIdSection() {
-        coursRepository.findBySectionIdSection(1L).forEach(System.out::println);
+        coursRepository.findBySectionIdSection(3L).forEach(System.out::println);
     }
 
     @Test
@@ -105,8 +111,8 @@ class CoursApplicationTests {
     @Test
     void testCreateSection() {
         Section s = new Section();
-        s.setNomSection("Backend");
-        s.setDescriptionSection("Cours backend");
+        s.setNomSection("frontend");
+        s.setDescriptionSection("Cours frontend");
         sectionRepository.save(s);
     }
 

@@ -8,10 +8,19 @@ import com.moetez.cours.repos.CoursRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import com.moetez.cours.entities.Section;
+import com.moetez.cours.repos.SectionRepository;
 
 @Service
 public
 class CoursServiceImpl implements CoursService {
+
+    @Autowired
+    SectionRepository sectionRepository;
+
+    @Override
+    public List<Section> getAllSections() {
+        return sectionRepository.findAll();
+    }
 
     @Autowired
     private CoursRepository coursRepository;

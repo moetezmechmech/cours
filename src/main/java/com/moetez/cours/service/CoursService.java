@@ -19,4 +19,5 @@ public interface CoursService {
     List<Cours> findBySectionIdSection(Long id);
     List<Cours> findByOrderByNomCoursAsc();
     List<Cours> trierCoursNomsPrix();
+    List<Section> getAllSections();
 }
